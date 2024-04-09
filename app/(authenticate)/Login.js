@@ -15,7 +15,7 @@ const Login = ({navigation}) => {
         const token = await AsyncStorage.getItem("authToken");
         if(token)
         {
-          navigation.navigate('Homepage')
+          navigation.navigate('') // add name of the page you want to navigate
         }
       }catch(error){
         console.log(error)
