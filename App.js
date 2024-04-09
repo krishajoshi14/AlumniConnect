@@ -11,15 +11,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{ headerShown: false }} // Hide the header for Login screen
+        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} // Hide the header for Login screen
         />
-        <Stack.Screen
-          name="Register"
-          component={Register}
-          options={{ headerShown: false }} // Hide the header for Register screen
+        <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} // Hide the header for Register screen
         />
       </Stack.Navigator>
     </NavigationContainer>
