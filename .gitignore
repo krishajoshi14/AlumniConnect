@@ -1,1 +1,28 @@
+# Ignore node_modules directory
 node_modules/
+
+# Ignore Expo-specific files
+.expo/
+
+# Ignore macOS specific files
+.DS_Store
+
+# Ignore Android build output
+android/app/build/
+
+# Ignore iOS build output
+ios/Pods/
+ios/build/
+
+# Ignore yarn lock file
+yarn.lock
+
+# Ignore npm lock file
+package-lock.json
+
+# Ignore Android Studio files
+*.iml
+.idea/
+
+# Ignore Visual Studio Code folder
+.vscode/
