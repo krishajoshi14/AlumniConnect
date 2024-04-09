@@ -74,7 +74,7 @@ const sendVerificationEmail = async(email,verificationToken) => {
         service:"gmail",
         auth:{
             user:"krisha.joshi.btech2021@sitpune.edu.in",
-            pass:"Lon@24455"
+            pass:""     //generate passkey
         }
     });
 
