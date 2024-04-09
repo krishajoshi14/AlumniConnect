@@ -1,4 +1,4 @@
-import { Image,KeyboardAvoidingView,Pressable,SafeAreaView,StyleSheet,Text,TextInput,View,} from 'react-native'
+import { Alert,Image,KeyboardAvoidingView,Pressable,SafeAreaView,StyleSheet,Text,TextInput,View,} from 'react-native'
 import React, {useState} from 'react'
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
@@ -10,13 +10,15 @@ const Register = ({navigation}) => {
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
   const [name,setName] = useState("");
-  const [image,setImage]= useState("");
+  // const [image,setImage]= useState("");
+  
   const handleRegister = () => {
+    console.log("Hello")
     const user = {
       name: name,
       email: email,
       password: password,
-      profileImage: image
+      // profileImage: image
     }
 
     axios.post("http://localhost:3000/register",user).then((response)=>{
@@ -25,7 +27,7 @@ const Register = ({navigation}) => {
       setName("");
       setEmail("");
       setPassword("");
-      setImage("");
+      // setImage("");
     }).catch((error) => {
       Alert.alert("Registeration failed","An error occurred while registering");
       console.log("Registeration failed",error);
@@ -147,7 +149,7 @@ const Register = ({navigation}) => {
 
             {/* for Image input */}
 
-          <View
+          {/* <View
             style={{
               flexDirection: "row",
               alignItems: "center",
@@ -170,7 +172,7 @@ const Register = ({navigation}) => {
               }}
               placeholder="Enter your image url"
             />
-          </View>
+          </View> */}
 
           <View
             style={{

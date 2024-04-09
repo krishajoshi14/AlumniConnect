@@ -10,6 +10,7 @@ const cors=require("cors");
 app.use(cors());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
+const jwt=require("jsonwebtoken")
 
 mongoose.connect("mongodb+srv://krisha:krisha@cluster0.adcgzdg.mongodb.net/",{
     useNewUrlParser:true,
@@ -26,7 +27,7 @@ app.listen(port,()=>{
 
 const User = require("./models/user");
 const Post = require("./models/post");
-const { profileEnd } = require("console");
+// const { profileEnd } = require("console");
 
 //end point to register a user in the backend
 
@@ -46,7 +47,7 @@ app.post("/register",async(req,res) => {
             name,
             email,
             password,
-            profileImage
+            // profileImage
         });
 
         //generate the verification token
@@ -115,3 +116,34 @@ app.get("/verify/:token"),async(req,res) => {
         res.status(500).json({message:"Email verification failed"})
     }
 }
+
+const generateSecretKey = () =>{
+    const secretKey =crypto.randomBytes(32).toString("hex");
+    return secretKey;
+};
+
+const secretKey=generateSecretKey();
+
+//end point to login user
+app.post("/login",async(req,res)=>{
+    try{
+        const {email,password}=req.body;
+
+        //check if user already exists
+        const user= await User.findOne({email});
+        if(!user){
+            res.status(401).json({message:"Invalid email or password"})
+        }
+
+        //check if password is correct
+        if(user.password!==password){
+            return res.status(401).json({message:"Invalid Password"})
+        }
+
+        const token= jwt.sign({userId:user._id},secretKey)
+        res.status(200).json({token})
+
+    }catch(error){
+        res.status(500).json({message:"Login Failed"});
+    }
+})
