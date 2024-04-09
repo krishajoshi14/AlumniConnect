@@ -4,13 +4,34 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
+import axios from "axios";
 
 const Register = ({navigation}) => {
   const [email,setEmail] = useState("");
-  const [password,setPasswor] = useState("");
+  const [password,setPassword] = useState("");
   const [name,setName] = useState("");
   const [image,setImage]= useState("");
+  const handleRegister = () => {
+    const user = {
+      name: name,
+      email: email,
+      password: password,
+      profileImage: image
+    }
 
+    axios.post("http://localhost:3000/register",user).then((response)=>{
+      console.log(response);
+      Alert.alert("Registeration Successful","You have been registered successfully");
+      setName("");
+      setEmail("");
+      setPassword("");
+      setImage("");
+    }).catch((error) => {
+      Alert.alert("Registeration failed","An error occurred while registering");
+      console.log("Registeration failed",error);
+    })
+
+  }
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "white", alignItems: "center" }}
@@ -168,6 +189,7 @@ const Register = ({navigation}) => {
 
           <View style={{ marginTop: 50 }}>
             <Pressable
+              onPress={handleRegister}
               style={{
                 width: 200,
                 backgroundColor: "#0072b1",
