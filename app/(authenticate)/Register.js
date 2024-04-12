@@ -1,17 +1,17 @@
-import { Alert,Image,KeyboardAvoidingView,Pressable,SafeAreaView,StyleSheet,Text,TextInput,View,} from 'react-native'
-import React, {useState} from 'react'
+import { Alert, Image, KeyboardAvoidingView, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View, } from 'react-native'
+import React, { useState } from 'react'
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import axios from "axios";
 
-const Register = ({navigation}) => {
-  const [email,setEmail] = useState("");
-  const [password,setPassword] = useState("");
-  const [name,setName] = useState("");
+const Register = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   // const [image,setImage]= useState("");
-  
+
   const handleRegister = () => {
     console.log("Hello")
     const user = {
@@ -21,19 +21,19 @@ const Register = ({navigation}) => {
       // profileImage: image
     }
 
-    axios.post("http://localhost:3000/register",user).then((response)=>{
+    axios.post("http://192.168.1.11:3000/register", user).then((response) => {
       console.log(response);
-      Alert.alert("Registeration Successful","You have been registered successfully");
+      Alert.alert("Registeration Successful", "You have been registered successfully");
       setName("");
       setEmail("");
       setPassword("");
       // setImage("");
     }).catch((error) => {
-      Alert.alert("Registeration failed","An error occurred while registering");
-      console.log("Registeration failed",error);
+      Alert.alert("Registeration failed", "An error occurred while registering");
+      console.log("Registeration failed", error);
     })
-
   }
+
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "white", alignItems: "center" }}
@@ -73,7 +73,7 @@ const Register = ({navigation}) => {
               marginTop: 20,
             }}
           >
-            <Ionicons name="person" size={24} color="gray" style={{marginLeft:8}} />
+            <Ionicons name="person" size={24} color="gray" style={{ marginLeft: 8 }} />
             <TextInput
               value={name}
               onChangeText={(text) => setName(text)}
@@ -118,36 +118,36 @@ const Register = ({navigation}) => {
               placeholder="Enter your Email"
             />
           </View>
-            
+
           {/* for password input */}
 
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 5,
-                backgroundColor: "#E0E0E0",
-                paddingVertical: 5,
-                borderRadius: 5,
-                marginTop: 30,
-              }}
-            >
-              <AntDesign
-                style={{ marginLeft: 8 }}
-                name="lock1"
-                size={24}
-                color="gray"
-              />
-              <TextInput
-                value={password}
-                onChangeText={(text) => setPassword(text)}
-                secureTextEntry={true}
-                style={{ color: "gray", marginVertical: 10, width: 250, fontSize: password? 14:14 }}
-                placeholder="Enter your Password"
-              />
-            </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 5,
+              backgroundColor: "#E0E0E0",
+              paddingVertical: 5,
+              borderRadius: 5,
+              marginTop: 30,
+            }}
+          >
+            <AntDesign
+              style={{ marginLeft: 8 }}
+              name="lock1"
+              size={24}
+              color="gray"
+            />
+            <TextInput
+              value={password}
+              onChangeText={(text) => setPassword(text)}
+              secureTextEntry={true}
+              style={{ color: "gray", marginVertical: 10, width: 250, fontSize: password ? 14 : 14 }}
+              placeholder="Enter your Password"
+            />
+          </View>
 
-            {/* for Image input */}
+          {/* for Image input */}
 
           {/* <View
             style={{

@@ -1,39 +1,38 @@
-import {Image,KeyboardAvoidingView,Pressable,SafeAreaView,StyleSheet,Text,TextInput,View,} from "react-native";
+import { Image, KeyboardAvoidingView, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View, } from "react-native";
 import React, { useState, useEffect } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Login = ({navigation}) => {
-  const {email,setEmail} = useState("");
-  const {password,setPassword} = useState("");
+const Login = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  useEffect(()=>{
-    const checkLoginStatus = async() =>{
-      try{
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
         const token = await AsyncStorage.getItem("authToken");
-        if(token)
-        {
+        if (token) {
           navigation.navigate('') // add name of the page you want to navigate
         }
-      }catch(error){
+      } catch (error) {
         console.log(error)
       }
     }
     checkLoginStatus();
-  },[])
+  }, [])
 
-  const handleLogin=()=>{
-    const user={
-      email:email,
-      password:password
+  const handleLogin = () => {
+    const user = {
+      email: email,
+      password: password
     }
 
-    axios.post("http://localhost:3000/login",user).then((response)=>{
+    axios.post("http://192.168.1.11:3000/login", user).then((response) => {
       console.log(response)
       const token = response.data.token;
-      AsyncStorage.setItem("authToken",token)
+      AsyncStorage.setItem("authToken", token)
       navigation.navigate('Homepage');
     })
   }
@@ -115,7 +114,7 @@ const Login = ({navigation}) => {
                 value={password}
                 onChangeText={(text) => setPassword(text)}
                 secureTextEntry={true}
-                style={{ color: "gray", marginVertical: 10, width: 250, fontSize: password? 14:14 }}
+                style={{ color: "gray", marginVertical: 10, width: 250, fontSize: password ? 14 : 14 }}
                 placeholder="Enter your Password"
               />
             </View>
@@ -138,7 +137,7 @@ const Login = ({navigation}) => {
 
           <View style={{ marginTop: 80 }}>
             <Pressable
-            onPress={handleLogin}
+              onPress={handleLogin}
               style={{
                 width: 200,
                 backgroundColor: "#0072b1",
